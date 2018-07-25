@@ -1,0 +1,23 @@
+<h1>Stats</h1>
+<% @teams.each do |team| %>
+  <p>Win rate for the <%= team %>: <%= @winRate[team] %></p>
+  <p>Loss rate for the <%= team %>: <%= @lossRate[team] %></p>
+<% end %>
+
+<h1>Compare the teams: </h1>
+<%= form_tag stats_path(@input_teams) do %>
+    <%= text_field_tag :input1 %>
+    <%= text_field_tag :input2 %>
+    <%= submit_tag "Compare" %>
+<% end %>
+
+<% if @error %>
+  <div id="error_explanation">
+    <h2>Invalid input</h2>
+  </div>
+<% end %>
+
+<% if @compareWinRate && @compareLossRate %>
+  <h2>Win rate for @team1 against @team2: <%= @compareWinRate %></h2>
+  <h2>Loss rate for @team1 against @team2: <%= @compareLossRate %></h2>
+<% end %>
